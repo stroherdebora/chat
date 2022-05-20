@@ -16,27 +16,74 @@ class _MessagesState extends State<Messages> {
     });
   }
 
+  final primaryColor = Color.fromARGB(190, 1, 34, 54);
+
+  Widget _buildList() => ListView(
+        // name is a listTile widget which is defined below
+        children: [
+          name('debora', 'stroher'),
+          name('gabriel', 'medeiros'),
+          name('rafael', 'vargas'),
+          name('julia', 's2'),
+          name('debzera', 'jr'),
+          const Divider(),
+          name('deb', 'zera'),
+          name('deb', 'ora'),
+          name('Chaitanya', ' kumar'),
+          name('Rio', 'St'),
+          name('debora', 'stroher'),
+          name('gabriel', 'medeiros'),
+          name('rafael', 'vargas'),
+          name('julia', 's2'),
+          name('debzera', 'jr'),
+        ],
+      );
+
+// name is a function returning ListTile widget
+  ListTile name(String firstName, String lastName) => ListTile(
+        title: Text(firstName,
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+            )),
+        subtitle: Text(lastName),
+        leading: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.blue[500],
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryColor,
       appBar: AppBar(
         title: const Center(
-          child: Text(
-            'Messages',
-            textAlign: TextAlign.center,
-          ),
+          child: Text('Messages', textAlign: TextAlign.center),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: SingleChildScrollView(
+        child: Stack(
           children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text('$_counter', style: Theme.of(context).textTheme.headline4),
+            Container(
+              height: MediaQuery.of(context).size.height,
+              width: double.infinity,
+              color: Colors.transparent,
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40.0),
+                      topRight: Radius.circular(40.0),
+                    )),
+                child: _buildList(),
+              ),
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: primaryColor,
         onPressed: (_incrementCounter),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
